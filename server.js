@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const campsiteRouter = require('./routes/campsiteRouter');
+const promotionRouter = require('./routes/promotionRouter');
 
 const hostname = 'localhost';
 const port = 3000;
@@ -10,11 +11,12 @@ const port = 3000;
 const app = express();
 //using morgan middleware here instead of callback function - this will configure morgan to log using the development version to print add. info to screen
 app.use(morgan('dev'));
-
+;
 //when server receives requests in the body, this middleware function will handle parsing.json data int JS properties of the request object so we can use the data in JS
 app.use(express.json());
 
 app.use('/campsites', campsiteRouter);
+app.use('/promotions', promotionRouter);
 
 //set up express to serve files from the public folder with the help of middleware function called express.static
 app.use(express.static(__dirname + '/public')); //__dirname will refer to the absolute path of the current directory of the file that it is in
